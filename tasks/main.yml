@@ -1,0 +1,32 @@
+
+- become: yes
+  block:
+
+  - name: Apt update
+    apt:
+      update_cache: yes
+      cache_valid_time: 36000
+    # For Russia
+    retries: 3
+    delay: 10  
+
+  - name: Install iptables-persistent
+    apt:
+      name: iptables-persistent=1.0.14ubuntu1
+      state: present
+
+  - name: Enable net.ipv4.ip_forward
+    ansible.posix.sysctl:
+      name: net.ipv4.ip_forward
+      value: '1'
+      sysctl_set: yes
+      state: present
+      reload: yes
+
+  - name: Enable MASQUERADE
+    ansible.builtin.iptables:
+      table: nat
+      jump: MASQUERADE
+      chain: POSTROUTING
+    notify:
+    - Save iptables

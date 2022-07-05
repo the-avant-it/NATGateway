@@ -1,0 +1,4 @@
+---
+- name: Save iptables
+  shell: iptables-save > /etc/iptables/rules.v4
+  become: yes
