@@ -28,6 +28,7 @@
       table: nat
       chain: POSTROUTING
       flush: true
+    changed_when: false
 
   - name: Enable MASQUERADE
     ansible.builtin.iptables:
@@ -35,5 +36,8 @@
       source: "{{ nat_gateway.source_cidr }}"
       jump: MASQUERADE
       chain: POSTROUTING
-    notify:
-    - Save iptables
+    changed_when: false
+
+  - name: Save iptables
+    shell: iptables-save > /etc/iptables/rules.v4
+    changed_when: false
