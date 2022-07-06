@@ -26,6 +26,7 @@
   - name: Enable MASQUERADE
     ansible.builtin.iptables:
       table: nat
+      source: "{{ nat_gateway.source_cidr }}"
       jump: MASQUERADE
       chain: POSTROUTING
     notify:
