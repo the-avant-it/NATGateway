@@ -23,6 +23,12 @@
       state: present
       reload: yes
 
+  - name: Clean nat POSTROUTING table 
+    ansible.builtin.iptables:
+      table: nat
+      chain: POSTROUTING
+      flush: true
+
   - name: Enable MASQUERADE
     ansible.builtin.iptables:
       table: nat
