@@ -41,3 +41,7 @@
   - name: Save iptables
     shell: iptables-save > /etc/iptables/rules.v4
     changed_when: false
+
+  - name: Configure UFW
+    include_tasks: configure-ufw.yml    
+    when: "{{ nat_gateway.configure_ufw }}"

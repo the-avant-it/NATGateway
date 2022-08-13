@@ -1,0 +1,36 @@
+- name: Allow all traffic from IPv4 private space
+  ufw:
+    rule: allow
+    src: '{{ item }}'
+    proto: any
+    # Looks like it is needed when MASQUERADING is enabled?
+    route: yes
+  loop:
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - 192.168.0.0/16
+
+- name: Allow 22 port
+  ufw:
+    rule: allow
+    port: '22'
+    src: '{{ item }}'
+  loop: "{{ nat_gateway.ufw_allowed_ssh_ips }}"
+
+# https://docs.ansible.com/ansible/2.7/modules/ufw_module.html
+- name: Deny incoming and enable UFW
+  community.general.ufw:
+    state: enabled
+    direction: incoming
+    default: deny  
+
+# https://docs.ansible.com/ansible/2.7/modules/ufw_module.html
+- name: Allow outgoing and enable UFW
+  community.general.ufw:
+    state: enabled
+    direction: outgoing
+    default: allow  
+
+- name: Apply UFW changes
+  community.general.ufw:
+    state: reloaded
