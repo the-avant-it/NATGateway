@@ -3,8 +3,6 @@
     rule: allow
     port: '22'
     src: '{{ item }}'
-    # Looks like it is needed when MASQUERADING is enabled?
-    route: yes    
   loop: "{{ nat_gateway.ufw_allowed_ssh_ips }}"
 
 - name: Allow all traffic from IPv4 private space
@@ -14,6 +12,18 @@
     proto: any
     # Looks like it is needed when MASQUERADING is enabled?
     route: yes
+  loop:
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - 192.168.0.0/16
+
+- name: Allow all traffic from IPv4 private space
+  ufw:
+    rule: allow
+    src: '{{ item }}'
+    proto: any
+    # Looks like it is needed when MASQUERADING is enabled?
+    route: no
   loop:
   - 10.0.0.0/8
   - 172.16.0.0/12
