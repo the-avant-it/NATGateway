@@ -1,3 +1,7 @@
+# Common.NatGateway
+
+Role for configuring NAT gateway via sumple iptables masquerading
+
 # Changelog 
 
 ## V1.1.1
