@@ -33,15 +33,12 @@
   - name: Enable MASQUERADE
     ansible.builtin.iptables:
       table: nat
-      source: "{{ nat_gateway.source_cidr }}"
+      source: "{{ item }}"
       jump: MASQUERADE
       chain: POSTROUTING
     changed_when: false
+    loop: "{{ nat_gateway.source_cidrs }}"
 
   - name: Save iptables
     shell: iptables-save > /etc/iptables/rules.v4
     changed_when: false
-
-  - name: Configure UFW
-    include_tasks: configure-ufw.yml    
-    when: "{{ nat_gateway.configure_ufw }}"

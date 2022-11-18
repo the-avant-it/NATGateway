@@ -1,4 +1,0 @@
-nat_gateway:
-  configure_ufw: false
-  ufw_allowed_ssh_ips: []
-
