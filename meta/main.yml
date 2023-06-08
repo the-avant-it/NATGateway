@@ -39,7 +39,7 @@ galaxy_info:
   #   - 1.0
   #   - 7
   #   - 99.99
-    platforms:
+  platforms:
     - name: CentOS
       versions:
         - all
