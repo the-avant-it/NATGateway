@@ -39,6 +39,20 @@
     changed_when: false
     loop: "{{ nat_gateway.source_cidrs }}"
 
+  - name: Check if docker socket file exists
+    stat:
+      path: /var/run/docker.sock
+    register: docker_socket
+
+  - name: Enable MASQUERADE for docker
+    ansible.builtin.iptables:
+      table: nat
+      source: "172.17.0.0/16"
+      jump: MASQUERADE
+      chain: POSTROUTING
+      out_interface: "! docker0"
+    when: docker_socket.stat.exists 
+
   - name: Save iptables
     shell: iptables-save > /etc/iptables/rules.v4
     changed_when: false
