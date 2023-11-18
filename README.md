@@ -2,22 +2,28 @@
 
 Role for configuring NAT gateway via sumple iptables masquerading
 
+Tested for AWS and YC
+
 # Changelog 
 
-## V2.0.0
+## 2.1.0
+
+- Make it work in AWS
+
+## 2.0.0
 
 - BREAKING CHANGE: Remove support for configure_ufw and ufw_allowed_ssh_ips
 - BREAKING CHANGE: Accept array of cidrs
 
-## V1.1.1
+## 1.1.1
 
 - Fix UFW configuration
 
-## V1.1.0
+## 1.1.0
 
 - Add optional UFW configuration
 
-# Documentation for V1.1.1
+# Documentation for 1.1.1
 
 ## Requirements
 
@@ -42,7 +48,7 @@ nat_gateway:
 
 ```
 
-# Documentation for V2.0.0
+# Documentation for 2.0.0
 
 ## Requirements
 
