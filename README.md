@@ -6,6 +6,10 @@ Tested for AWS and YC
 
 # Changelog 
 
+## 2.2.0
+
+- Add support for ubuntu 22.04
+
 ## 2.1.0
 
 - Make it work in AWS

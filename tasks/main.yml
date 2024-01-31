@@ -1,6 +1,11 @@
-
 - become: yes
   block:
+
+  - name: Set default value iptables_persistent_package_version if not sspecified
+    set_fact:
+      nat_gateway:
+        iptables_persistent_package_version: "{{ nat_gateway.iptables_persistent_package_version_os_defaults[ansible_distribution + ansible_distribution_version] }}"
+    when: nat_gateway.iptables_persistent_package_version == None
 
   - name: Apt update
     apt:
