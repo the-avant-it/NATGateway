@@ -6,7 +6,7 @@ Tested for AWS and YC
 
 # Changelog 
 
-## 2.2.0
+## 2.2.1
 
 - Add support for ubuntu 22.04
 

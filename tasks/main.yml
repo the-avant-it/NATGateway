@@ -1,7 +1,7 @@
 - become: yes
   block:
 
-  - name: Set default value iptables_persistent_package_version if not sspecified
+  - name: Set default value iptables_persistent_package_version if not specified
     set_fact:
       nat_gateway:
         iptables_persistent_package_version: "{{ nat_gateway.iptables_persistent_package_version_os_defaults[ansible_distribution + ansible_distribution_version] }}"
@@ -17,7 +17,7 @@
 
   - name: Install iptables-persistent
     apt:
-      name: iptables-persistent=1.0.14ubuntu1
+      name: iptables-persistent={{ nat_gateway.iptables_persistent_package_version }}
       state: present
 
   - name: Enable net.ipv4.ip_forward
