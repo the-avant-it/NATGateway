@@ -6,6 +6,11 @@ Tested for AWS and YC
 
 # Changelog 
 
+## 2.2.2
+
+- Add configurable cleaning up POSTROUTING table
+- Add configurable enabling MASQUERADE for docker
+
 ## 2.2.1
 
 - Add support for ubuntu 22.04

@@ -34,6 +34,7 @@
       chain: POSTROUTING
       flush: true
     changed_when: false
+    when: nat_gateway.clean_postrouting
 
   - name: Enable MASQUERADE
     ansible.builtin.iptables:
@@ -54,10 +55,11 @@
     ansible.builtin.iptables:
       table: nat
       source: "172.17.0.0/16"
+{{ nat_gateway.docker_net }}
       jump: MASQUERADE
       chain: POSTROUTING
       out_interface: "! docker0"
-    when: docker_socket.stat.exists 
+    when: docker_socket.stat.exists and nat_gateway.docker_masquerade
 
   - name: Save iptables
     shell: iptables-save > /etc/iptables/rules.v4
