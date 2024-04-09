@@ -54,8 +54,7 @@
   - name: Enable MASQUERADE for docker
     ansible.builtin.iptables:
       table: nat
-      source: "172.17.0.0/16"
-{{ nat_gateway.docker_net }}
+      source: "{{ nat_gateway.docker_net }}"
       jump: MASQUERADE
       chain: POSTROUTING
       out_interface: "! docker0"
