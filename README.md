@@ -11,6 +11,13 @@ Tested for AWS and YC
 - Add configurable cleaning up POSTROUTING table
 - Add configurable enabling MASQUERADE for docker
 
+```yaml
+nat_gateway:
+  docker_masquerade: true
+  docker_net: "172.17.0.0/16"
+  clean_postrouting: true
+```
+
 ## 2.2.1
 
 - Add support for ubuntu 22.04
