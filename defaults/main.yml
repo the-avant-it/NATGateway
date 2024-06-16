@@ -1,4 +1,8 @@
 nat_gateway:
+  apt_retries: 10
+  apt_retry_delay: 12
+  apt_retry_on_stderr_containing: "Could not get lock"
+  
   iptables_persistent_package_version: null
   iptables_persistent_package_version_os_defaults: 
     Ubuntu20.04: "1.0.14ubuntu1"

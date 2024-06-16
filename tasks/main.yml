@@ -11,15 +11,20 @@
     apt:
       update_cache: yes
       cache_valid_time: 36000
-    # For Russia
-    retries: 3
-    delay: 10  
+    register: r
+    until: "('stderr' not in r) or (ansible_controller.apt_retry_on_stderr_containing not in r.stderr)"
+    retries: "{{ ansible_controller.apt_retries | int }}"
+    delay: "{{ ansible_controller.apt_retry_delay | int }}"  
 
   - name: Install iptables-persistent
     apt:
       name: iptables-persistent={{ nat_gateway.iptables_persistent_package_version }}
       state: present
-
+    register: r
+    until: "('stderr' not in r) or (ansible_controller.apt_retry_on_stderr_containing not in r.stderr)"
+    retries: "{{ ansible_controller.apt_retries | int }}"
+    delay: "{{ ansible_controller.apt_retry_delay | int }}"  
+    
   - name: Enable net.ipv4.ip_forward
     ansible.posix.sysctl:
       name: net.ipv4.ip_forward

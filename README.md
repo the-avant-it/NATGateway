@@ -6,6 +6,10 @@ Tested for AWS and YC
 
 # Changelog 
 
+## 2.3.0
+
+- Add apt retries
+
 ## 2.2.2
 
 - Add configurable cleaning up POSTROUTING table
@@ -39,7 +43,7 @@ nat_gateway:
 
 - Add optional UFW configuration
 
-# Documentation for 2.2.2
+# Documentation for 2.3.0
 
 ## Requirements
 
@@ -65,6 +69,12 @@ nat_gateway:
   iptables_persistent_package_version_os_defaults: 
     Ubuntu20.04: "1.0.14ubuntu1"
     Ubuntu22.04: "1.0.16"  
+  # Optional
+  apt_retries: 10
+  # Optional
+  apt_retry_delay: 12
+  # Optional
+  apt_retry_on_stderr_containing: "Could not get lock"    
 ```  
 
 ### Secret
