@@ -39,6 +39,40 @@ nat_gateway:
 
 - Add optional UFW configuration
 
+# Documentation for 2.2.2
+
+## Requirements
+
+## Variables
+
+### Non-secret
+
+```yaml
+nat_gateway:
+  # Optional
+  docker_masquerade: true
+  # Optional
+  docker_net: "172.17.0.0/16"
+  # Optional
+  clean_postrouting: true
+  # Required. Masquerading will be applied only to traffic that goes from this CIDRs
+  source_cidrs: 
+  - 172.18.0.0/16
+  - 172.20.0.0/16
+  # Optional
+  iptables_persistent_package_version: null
+  # Optional
+  iptables_persistent_package_version_os_defaults: 
+    Ubuntu20.04: "1.0.14ubuntu1"
+    Ubuntu22.04: "1.0.16"  
+```  
+
+### Secret
+
+```yaml
+
+```
+
 # Documentation for 1.1.1
 
 ## Requirements
@@ -56,28 +90,6 @@ nat_gateway:
   # Deprecated. Use security groups instead. Empty by default
   ufw_allowed_ssh_ips: 
   - "{{ lookup('dig', 'openvpn-pub.algobot.ru') }}"  
-```  
-
-### Secret
-
-```yaml
-
-```
-
-# Documentation for 2.0.0
-
-## Requirements
-
-## Variables
-
-### Non-secret
-
-```yaml
-nat_gateway:
-  # Masquerading will be applied only to traffic that goes from this CIDRs
-  source_cidrs: 
-  - 172.18.0.0/16
-  - 172.20.0.0/16
 ```  
 
 ### Secret
