@@ -6,7 +6,7 @@ Tested for AWS and YC
 
 # Changelog 
 
-## 2.3.0
+## 2.3.1
 
 - Add apt retries
 
