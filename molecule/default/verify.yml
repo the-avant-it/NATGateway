@@ -1,0 +1,28 @@
+---
+- name: Test if network configuration works and ping is successful
+  hosts: all
+  gather_facts: no
+  become: true
+  tasks:
+    - name: Configure IP address for eth0:1
+      ansible.builtin.shell:
+        cmd: "ifconfig eth0:1 172.22.254.3 netmask 255.255.254.0"
+      ignore_errors: true
+
+    - name: Test if ping works with 0% packet loss
+      ansible.builtin.shell:
+        cmd: |
+          ping -I 172.22.254.3 8.8.8.8 -c 3 | grep -o ' 0% packet loss'
+      register: ping_result
+      changed_when: false
+      failed_when: false
+
+    - name: Check if ping result is successful
+      ansible.builtin.set_fact:
+        ping_status: "{{ ping_result.stdout == ' 0% packet loss' }}"
+
+    - name: Assert that ping was successful
+      ansible.builtin.assert:
+        that:
+          - ping_status
+        msg: "Ping test failed, packet loss detected"

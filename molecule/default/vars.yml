@@ -1,0 +1,5 @@
+nat_gateway:
+  # Masquerading will be applied only to traffic that goes from this CIDRs
+  source_cidrs: 
+  - 172.22.254.0/23
+

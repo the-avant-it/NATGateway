@@ -1,0 +1,12 @@
+---
+roles:
+- src: git+ssh://git@gitlab.avant-it.ru/main/common/ansibleroles/common.common.git
+  scm: git
+  version: 1.9.6
+  name: common
+- src: git+ssh://git@gitlab.avant-it.ru/main/common/ansibleroles/common.docker.git
+  scm: git
+  version: 1.0.0
+  name: docker
+
+collections: []
